@@ -1,0 +1,27 @@
+pipeline {
+    agent any
+    tools {
+        maven 'maven_3.9.12'
+    }
+    stages {
+        stage("pull") {
+            steps {
+                git url: 'https://github.com/paul4096/kalkulator_java.git', branch: 'master'
+            }
+        }
+        stage("build") {
+            steps {
+                // bat 'mvn clean package'
+                sh 'mvn clean package'
+            }
+        }
+    }
+    post {
+        always {
+            junit '**/target/surefire-reports/TEST-*.xml'
+        }
+        success {
+            archiveArtifacts 'target/*.jar'
+        }
+    }
+}
