@@ -33,7 +33,7 @@ class LogikaKalkulatoraTest {
 
     @Test
     void testModule(){
-        var result = logika.oblicz(112, 3, "%");
+        var result = logika.oblicz(1121, 3, "%");
         assertEquals(1, result);
     }
 
